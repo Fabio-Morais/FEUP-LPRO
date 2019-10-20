@@ -6,15 +6,20 @@ public class Map {
 
 
 	private char initialMap[][] = { { 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' },
-			{ 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x' }, { 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
-			{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' }, { 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
-			{ 'x', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', 'E' }, { 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
-			{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' }, { 'x', ' ', 'x', 'x', ' ', ' ', ' ', ' ', ' ', 'x' },
-			{ 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' } };
+									{ 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x' }, 
+									{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
+									{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' }, 
+									{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
+									{ 'x', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', 'E' }, 
+									{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
+									{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' }, 
+									{ 'x', ' ', 'x', 'x', ' ', ' ', ' ', ' ', ' ', 'x' },
+									{ 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' } };
 	private char currentMap[][];
 	private Dragon dragon;
 	private Hero hero;
 	private Item sword;
+	private Item exit;
 
 	/* Constructor */
 	public Map() {
@@ -23,10 +28,11 @@ public class Map {
 		this.hero = new Hero('H');
 		this.dragon = new Dragon('D');
 		this.sword = new Item('S');
+		this.exit = new Item('E');
 		putHero();
 		putDragon();
 		putSword();
-
+		putExit();
 	}
 	/* put the hero in the map */
 	private void putHero() {
@@ -53,12 +59,15 @@ public class Map {
 			// Obtain a number between [0 - 9].
 			x = rand.nextInt(10);
 			y = rand.nextInt(10);
-			System.out.println("is free: "+ isFree(x, y));
-			System.out.println("is isCloseFromDragon: "+ isCloseFromDragon(x, y));
-			System.out.println(x+ " - "+ y);
 		} while (!isFree(x, y) || isCloseFromDragon(x, y));// fazer se nao tiver espaço em branco, ou se estiver perto do dragon
+		x=1;
+		y=5;
 		setToMap(x, y, sword.getSkin());
 		sword.setXY(x, y);
+	}
+	/*coloca coordenadas da saida*/
+	private void putExit() {
+		exit.setXY(9, 5);
 	}
 	public char[][] getInitialMap() {
 		return initialMap;
@@ -98,13 +107,17 @@ public class Map {
 	public Item getSword() {
 		return sword;
 	}
+	
 
+	public Item getExit() {
+		return exit;
+	}
 	private boolean isCloseFromDragon(int x, int y) {
 		return ((dragon.getY() == y && dragon.getX() == x) || (dragon.getY() - 1 == y && dragon.getX() == x) || (dragon.getY() + 1 == y && dragon.getX() == x)
 				|| (dragon.getX() + 1 == x && dragon.getY() == y) || (dragon.getX() - 1 == x && dragon.getY() == y));
 		
 	}
-	private boolean isFree(int x, int y) {
+	public boolean isFree(int x, int y) {
 		return currentMap[y][x] == ' ';
 	}
 	

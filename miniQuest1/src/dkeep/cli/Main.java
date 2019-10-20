@@ -13,7 +13,10 @@ public class Main {
 		
 		while (true) {
 			miniQuest.moveHero(readUserDirection());
+			//printMap(miniQuest);
+			miniQuest.moveDragon();
 			printMap(miniQuest);
+
 			if(!miniQuest.isRunning())
 				break;
 		}

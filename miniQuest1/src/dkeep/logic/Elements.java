@@ -3,10 +3,10 @@ package dkeep.logic;
 public class Elements {
 	private int x;
 	private int y;
+	private int oldX;
+	private int oldY;
 	private char skin;
 	
-
-
 
 	public int getX() {
 		return x;
@@ -16,6 +16,18 @@ public class Elements {
 		return y;
 	}
 	
+	
+	public int getOldX() {
+		return oldX;
+	}
+
+
+
+	public int getOldY() {
+		return oldY;
+	}
+
+
 	public char getSkin() {
 		return skin;
 	}
@@ -28,6 +40,11 @@ public class Elements {
 		this.x = x;
 		this.y = y;
 			
+	}
+	public void setOldXY(int oldX, int oldY) {
+		this.oldX = oldX;
+		this.oldY = oldY;
+
 	}
 
 	public void moveLeft() {
